@@ -34,16 +34,7 @@ export default function MovieHeader({ movie }: { movie: MovieDetail }) {
 
                     {/* Puntuación + Botones */}
                     <div className="mt-4 flex items-center gap-6 flex-wrap">
-
-                        {/* Círculo de puntuación */}
                         <MovieRating averageRating={movie.averageRating} />
-
-                        {/* Otros */}
-                        <button className="flex items-center border-none text-[#c5d3df] text-sm px-4 py-2 rounded 
-                            font-medium hover:bg-black transition cursor-pointer">
-                            {/* <PlayIcon className="h-5" /> */}
-                            <p>Play trailer</p>
-                        </button>
                     </div>
 
                     {/* Resumen */}
