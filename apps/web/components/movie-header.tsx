@@ -64,10 +64,6 @@ export default function MovieHeader({ movie }: { movie: MovieDetail }) {
                             <p className="text-white font-semibold truncate line-clamp-1">{writers}</p>
                             <p>Writers</p>
                         </div>
-                        <div>
-                            <p className="text-white font-semibold">Sofía Cuenca</p>
-                            <p>Screenplay</p>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import { useGetItem } from "@/hooks/useGetItem";
 import MovieHeader from "@/components/movie-header";
 import CastList from "@/components/cast-list";
 import DetailSkeleton from '@/components/detail-skeleton';
+import { ErrorAlert } from "@workspace/ui/components/error-alert";
 
 export default function Page() {
     const params = useParams();
@@ -16,7 +17,7 @@ export default function Page() {
         <>
             <div className="">
                 {isLoading && <DetailSkeleton />}
-                {error && <p className="mt-4 text-red-600">Error: {error.message}</p>}
+                {error && <ErrorAlert key={`error`} message={`${error.message}`} />}
             </div>
 
             <div className="">
@@ -27,7 +28,7 @@ export default function Page() {
                             <h3 className="font-bold text-2xl mx-2 mt-5">Reparto principal</h3>
                         </div>
                         <div className="w-full mx-auto flex flex-col md:flex-row gap-8">
-                            <CastList key={`cast-${data.id}`} cast={data.item.cast} />
+                            <CastList key={`cast-${data.item.id}`} cast={data.item.cast} />
                         </div>
                     </>
                 )}
