@@ -1,5 +1,6 @@
 import PQueue from "p-queue";
 import pRetry from "p-retry";
+import { setToCache, getFromCache } from "@/server/utils/cache";
 import { ImdbMovieSchema } from "@/server/models/external/imdb-movie";
 import { ImdbMovieDetailSchema } from "@/server/models/external/imdb-movie-detail";
 import type { Movie } from "@/server/models/domain/movie";
@@ -117,19 +118,29 @@ export class RapidApiClient {
             params.primaryTitle = q.trim();
         }
 
-        const data: any = await this.rawFetch('search', params);
-        const list = data ?? {};
+        const cacheKey = `search:${JSON.stringify(params)}`;
+        const cached = getFromCache<Movie[]>(cacheKey, "search");
+        if (cached) return cached;
 
-        const parsed = ImdbMovieSchema.array().parse(list.results);
+        const data: any = await this.rawFetch('search', params);
+        const parsed = ImdbMovieSchema.array().parse(data.results);
         const movies = parsed.map(mapImdbMovieToMovie);
+
+        setToCache(cacheKey, movies, "search");
 
         return movies;
     }
 
     async getItemById(id: string): Promise<MovieDetail> {
+        const cacheKey = `detail:${id}`;
+        const cached = getFromCache<MovieDetail>(cacheKey, "detail");
+        if (cached) return cached;
+
         const data: any = await this.rawFetch(`${encodeURIComponent(id)}`);
         const parsed = ImdbMovieDetailSchema.parse(data);
         const movieDetail = mapImdbMovieDetailToMovieDetail(parsed);
+
+        setToCache(cacheKey, movieDetail, "detail");
         return movieDetail;
     }
 }
