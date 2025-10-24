@@ -20,19 +20,17 @@ export default function Page() {
                 {error && <ErrorAlert key={`error`} message={`${error.message}`} />}
             </div>
 
-            <div className="">
-                {data && (
-                    <>
-                        <MovieHeader movie={data.item} />
-                        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
-                            <h3 className="font-bold text-2xl mx-2 mt-5">Reparto principal</h3>
-                        </div>
-                        <div className="w-full mx-auto flex flex-col md:flex-row gap-8">
-                            <CastList key={`cast-${data.item.id}`} cast={data.item.cast} />
-                        </div>
-                    </>
-                )}
-            </div>
+            {data && (
+                <>
+                    <MovieHeader movie={data.item} />
+                    <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
+                        <h3 className="font-bold text-2xl my-5">Reparto principal</h3>
+                    </div>
+                    <div className="w-full mx-auto flex flex-col md:flex-row gap-8">
+                        <CastList key={`cast-${data.item.id}`} cast={data.item.cast} />
+                    </div>
+                </>
+            )}
         </>
     );
 }
