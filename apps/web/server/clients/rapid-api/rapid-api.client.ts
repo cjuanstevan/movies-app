@@ -131,7 +131,7 @@ export class RapidApiClient {
         return movies;
     }
 
-    async getItemById(id: string): Promise<MovieDetail> {
+    async getMovieById(id: string): Promise<MovieDetail> {
         const cacheKey = `detail:${id}`;
         const cached = getFromCache<MovieDetail>(cacheKey, "detail");
         if (cached) return cached;

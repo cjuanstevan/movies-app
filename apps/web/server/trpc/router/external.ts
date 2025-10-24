@@ -28,11 +28,11 @@ export const externalRouter = router({
             }
         }),
 
-    getItem: publicProcedure
+    getMovieById: publicProcedure
         .input(z.object({ id: z.string().min(1, 'El id es requerido') }))
         .query(async ({ input, ctx }) => {
             try {
-                const item = await ctx.rapidApi.getItemById(input.id);
+                const item = await ctx.rapidApi.getMovieById(input.id);
                 if (!item) {
                     throw new TRPCError({ code: 'NOT_FOUND', message: 'Elemento no encontrado' });
                 }

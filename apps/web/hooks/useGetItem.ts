@@ -11,7 +11,7 @@ type ItemResponse = {
 export function useGetItem(
     id: string
 ): UseTRPCQueryResult<ItemResponse, TRPCClientErrorLike<AppRouter>> {
-    return trpc.external.getItem.useQuery(
+    return trpc.external.getMovieById.useQuery(
         { id },
         {
             enabled: !!id,
