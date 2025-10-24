@@ -43,7 +43,7 @@ export const ImdbMovieDetailSchema = z.object({
     "trailer": z.string().nullable(),
     "startYear": z.number().optional(),
     "endYear": z.null().nullable(),
-    "releaseDate": z.string().optional(),
+    "releaseDate": z.string().nullable(),
     "interests": z.array(z.string()).optional(),
     "countriesOfOrigin": z.array(z.string()).optional(),
     "externalLinks": z.array(z.any()).optional(),

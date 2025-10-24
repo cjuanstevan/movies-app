@@ -22,7 +22,7 @@ export function mapImdbMovieDetailToMovieDetail(external: ImdbMovieDetail): Movi
     const safeString = (s?: string | null) => s ?? '';
     const safeNumber = (n?: number | null) => n ?? 0;
 
-    const parseDate = (s?: string) => {
+    const parseDate = (s?: string | null) => {
         if (!s) return new Date(0);
         const d = new Date(s);
         return isNaN(d.getTime()) ? new Date(0) : d;
