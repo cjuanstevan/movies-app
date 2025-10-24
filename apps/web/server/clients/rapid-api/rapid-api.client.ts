@@ -31,14 +31,11 @@ export class RapidApiClient {
         this.key = cfg.key;
         this.baseUrl = ensureTrailingSlash(cfg.baseUrl);
 
-        // Determina host: prioridad a cfg.host, si no existe, derivar desde baseUrl
         if (cfg.host && cfg.host.length > 0) {
             this.host = cfg.host;
         } else {
-            // Intentamos derivarlo de baseUrl
             try {
                 const u = new URL(this.baseUrl);
-                // u.hostname devuelve sin puerto; es lo que típicamente necesita X-RapidAPI-Host
                 this.host = u.hostname;
             } catch (err) {
                 throw new Error(
@@ -54,7 +51,6 @@ export class RapidApiClient {
             Accept: 'application/json'
         };
 
-        // Sólo añadimos X-RapidAPI-Host si tenemos host determinado
         if (this.host) headers['X-RapidAPI-Host'] = this.host;
 
         return headers;
@@ -108,7 +104,6 @@ export class RapidApiClient {
     }
 
 
-    // Example wrappers (ajusta las rutas relativas según la API concreta)
     async searchMovies(q?: string, page = 1): Promise<Movie[]> {
         const params: Record<string, any> = {
             type: 'movie',
@@ -127,7 +122,8 @@ export class RapidApiClient {
         const parsed = ImdbMovieSchema.array().parse(list.results);
         const movies = parsed.map(mapImdbMovieToMovie);
 
-        return movies;
+        // Filtro solamente por motivos de Api con poca información
+        return movies.filter((m => m.rating > 0));
     }
 
     async getItemById(id: string): Promise<MovieDetail> {
