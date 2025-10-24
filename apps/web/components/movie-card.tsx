@@ -5,7 +5,7 @@ import Link from 'next/link.js';
 export default function MovieCard({ movie }: { movie: Movie }) {
     return (
         <>
-            <Link href={`/${movie.id}/details`}>
+            <Link href={`/${movie.id}/detail`}>
                 <div key={`movie-card-${movie.id}`} className="inline-block p-0 bg-blue-200 m-2 w-40 h-60 rounded-lg">
                     <div className="bg-white rounded-lg border p-1 shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer">
                         <div className="relative w-full h-48 overflow-hidden rounded-md">
