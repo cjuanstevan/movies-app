@@ -12,7 +12,8 @@ export function mapImdbMovieToMovie(external: ImdbMovie): Movie {
         posterUrl: external.primaryImage ?? defaultImage,
         description: external.description ?? '',
         trailerUrl: external.trailer ?? '',
-        rating: external.averageRating ?? 0.0
+        rating: external.averageRating ?? 0.0,
+        startYear: external.startYear
     };
 }
 

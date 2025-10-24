@@ -5,4 +5,5 @@ export interface Movie {
     description: string;
     trailerUrl: string;
     rating: number;
+    startYear?: number | null;
 }

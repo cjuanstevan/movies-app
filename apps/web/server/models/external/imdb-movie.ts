@@ -8,6 +8,7 @@ export const ImdbMovieSchema = z.object({
     description: z.string().nullable(),
     trailer: z.string().url().nullable(),
     averageRating: z.number().nullable(),
+    startYear: z.number().nullable()
 });
 
 export type ImdbMovie = z.infer<typeof ImdbMovieSchema>;

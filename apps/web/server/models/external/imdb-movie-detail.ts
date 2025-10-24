@@ -53,7 +53,7 @@ export const ImdbMovieDetailSchema = z.object({
     "grossWorldwide": z.number().nullable(),
     "genres": z.array(z.string()).optional(),
     "isAdult": z.boolean().optional(),
-    "runtimeMinutes": z.number().optional(),
+    "runtimeMinutes": z.number().nullable(),
     "averageRating": z.number().optional(),
     "numVotes": z.number().optional(),
     "directors": z.array(DirectorSchema).optional(),
