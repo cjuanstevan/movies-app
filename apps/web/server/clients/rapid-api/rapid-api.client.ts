@@ -109,7 +109,8 @@ export class RapidApiClient {
             type: 'movie',
             rows: 20,
             sortOrder: 'ASC',
-            sortField: 'id'
+            sortField: 'id',
+            averageRatingFrom: 1
         };
 
         if (q && q.trim()) {
@@ -122,8 +123,7 @@ export class RapidApiClient {
         const parsed = ImdbMovieSchema.array().parse(list.results);
         const movies = parsed.map(mapImdbMovieToMovie);
 
-        // Filtro solamente por motivos de Api con poca información
-        return movies.filter((m => m.rating > 0));
+        return movies;
     }
 
     async getItemById(id: string): Promise<MovieDetail> {
