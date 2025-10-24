@@ -1,8 +1,11 @@
 import PQueue from "p-queue";
 import pRetry from "p-retry";
 import { ImdbMovieSchema } from "@/server/models/external/imdb-movie";
+import { ImdbMovieDetailSchema } from "@/server/models/external/imdb-movie-detail";
 import type { Movie } from "@/server/models/domain/movie";
+import { MovieDetail } from "@/server/models/domain/movie-detail";
 import { mapImdbMovieToMovie } from "./mappers/movie-mapper";
+import { mapImdbMovieDetailToMovieDetail } from "./mappers/movie-mapper";
 
 type Config = {
     key: string;
@@ -107,7 +110,6 @@ export class RapidApiClient {
 
     // Example wrappers (ajusta las rutas relativas según la API concreta)
     async searchMovies(q?: string, page = 1): Promise<Movie[]> {
-        console.log('query api', q);
         const params: Record<string, any> = {
             type: 'movie',
             rows: 20,
@@ -128,13 +130,10 @@ export class RapidApiClient {
         return movies;
     }
 
-    async getItemById(id: string) {
-        const data: any = await this.rawFetch(`titles/${encodeURIComponent(id)}`);
-        return {
-            id: data.id ?? id,
-            title: data.title ?? data.name,
-            description: data.description ?? '',
-            raw: data
-        };
+    async getItemById(id: string): Promise<MovieDetail> {
+        const data: any = await this.rawFetch(`${encodeURIComponent(id)}`);
+        const parsed = ImdbMovieDetailSchema.parse(data);
+        const movieDetail = mapImdbMovieDetailToMovieDetail(parsed);
+        return movieDetail;
     }
 }
