@@ -12,7 +12,6 @@ export function useSearchItems(
     q?: string,
     page: number = 1
 ): UseTRPCQueryResult<SearchItemsResponse, TRPCClientErrorLike<AppRouter>> {
-    console.log('query in', q)
     return trpc.external.searchMovies.useQuery(
         { q, page },
         {

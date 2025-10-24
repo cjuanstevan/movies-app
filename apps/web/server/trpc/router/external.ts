@@ -13,7 +13,6 @@ export const externalRouter = router({
         )
         .query(async ({ input, ctx }) => {
             try {
-                console.log('input', input);
                 const items = await ctx.rapidApi.searchMovies(input.q, input.page);
                 return {
                     ok: true,

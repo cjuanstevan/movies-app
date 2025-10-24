@@ -8,7 +8,6 @@ type Props = {
 };
 
 export default function SearchBox({ query = '' }: Props) {
-    console.log('query', query);
     const { data, isLoading, error } = useSearchItems(query);
 
     return (

@@ -13,7 +13,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
 
         const items = await client.searchMovies(q, page);
-        console.log(items);
         res.status(200).json({ ok: true, items, flag: true });
     } catch (err: any) {
         console.error('test-rapid error', err);
