@@ -86,8 +86,8 @@ export class RapidApiClient {
                         console.log("RESPONSE: ", res.headers.get('x-ratelimit-requests-remaining'));
 
                         if (res.status === 429) {
-                            const e: any = new Error('Rate limit (429)');
-                            e.code = 429;
+                            const e: any = new Error('Error al consultar la API externa (Rate limit)');
+                            e.code = res.status;
                             throw e;
                         }
                         if (!res.ok) {
