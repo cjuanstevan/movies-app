@@ -1,4 +1,3 @@
-// apps/web/src/lib/trpc.ts
 import { createTRPCReact, type CreateTRPCReact } from '@trpc/react-query';
 import { httpBatchLink } from '@trpc/client';
 import superjson from 'superjson';

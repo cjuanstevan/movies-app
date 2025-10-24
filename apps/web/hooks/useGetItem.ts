@@ -5,7 +5,6 @@ import type { TRPCClientErrorLike } from '@trpc/client';
 import type { MovieDetail } from '@/server/models/domain/movie-detail';
 
 type ItemResponse = {
-    id: string;
     item: MovieDetail;
 };
 
