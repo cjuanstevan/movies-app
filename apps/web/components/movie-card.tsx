@@ -1,4 +1,3 @@
-// import { StarIcon } from '@heroicons/react/16/solid';
 import { Movie } from '../server/models/domain/movie.js';
 import Link from 'next/link.js';
 
@@ -9,12 +8,12 @@ export default function MovieCard({ movie }: { movie: Movie }) {
     return (
         <Link href={`/${movie.id}/detail`} aria-label={`Ver detalles de ${movie.title}`}>
             <article className="group bg-neutral-900/40 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-transform duration-300 ease-out transform hover:-translate-y-1">
-                <div className="relative w-full pb-[150%] bg-neutral-800"> {/* 2:3 poster ratio */}
+                <div className="relative w-full pb-[150%] bg-neutral-800">
                     {hasPoster ? (
                         <img
                             src={movie.posterUrl}
                             alt={movie.title}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300"
                         />
                     ) : (
                         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-neutral-400 bg-neutral-800/60 p-4">
