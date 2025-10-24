@@ -1,31 +1,69 @@
-# shadcn/ui monorepo template
+# Movies App
 
-This template is for creating a monorepo with shadcn/ui.
+Una aplicación Next.js para explorar y descubrir películas, construida con tecnologías web modernas y una interfaz limpia y adaptable.
 
-## Usage
+## API elegida
 
-```bash
-pnpm dlx shadcn@latest init
-```
+#### IMDb de [Rapid API](https://rapidapi.com/)
 
-## Adding components
+* Elección: Sencilla de integrar, contiene imágenes y varias propiedades que hace que la UI quede muy completa en cuanto a datos. 
+* Justificación: Para el ejercicio se prestaba perfectamente ya que solamente necesitaba listar, buscar y ver detalle.
 
-To add components to your app, run the following command at the root of your `web` app:
+#### Variables de entorno necesarias
 
-```bash
-pnpm dlx shadcn@latest add button -c apps/web
-```
+* **RAPIDAPI_KEY**: Llave que provee Rapid Api para IMDb. 
+* **RAPIDAPI_BASE_URL**: URL base de la API de IMDb.
+* **CACHE_MAX_ITEMS**: Cache general (en milisegundos).
+* **CACHE_TTL_SEARCH_MS**: Cache de búsquedas (en milisegundos).
+* **CACHE_TTL_DETAIL_MS**: Cache de detalles (en milisegundos).
 
-This will place the ui components in the `packages/ui/src/components` directory.
+### Intrucciones de instalación y ejecución
 
-## Tailwind
+#### Local:
 
-Your `tailwind.config.ts` and `globals.css` are already set up to use the components from the `ui` package.
+##### Clona el repositorio [cjuanstevan/movies-app](https://github.com/cjuanstevan/movies-app.git)
 
-## Using components
+##### 1. Instala las dependencias desde la términal:
+cd movies-app
+pnpm install
 
-To use the components in your app, import them from the `ui` package.
 
-```tsx
-import { Button } from "@workspace/ui/components/button"
-```
+##### 2. Crea un archivo `.env.local` en /apps/web o en la raíz del directorio
+
+##### 3. Agrega las variables de entorno mencionadas en `Variables de entorno necesarias` en archivo .env.local y configúralas
+
+* RAPIDAPI_KEY=
+* RAPIDAPI_BASE_URL=
+* CACHE_MAX_ITEMS=
+* CACHE_TTL_SEARCH_MS=
+* CACHE_TTL_DETAIL_MS=
+
+### Ejecución en modo desarrollo
+
+pnpm turbo dev
+
+### Métodos API Internos (TRPC)
+
+GET searchMovies
+  - Query params: search
+  - Retorna un listado de películas (por defecto el límite está en 20)
+
+GET getItemById
+  - Retorna el detalle de la película mediante su id
+  - Incluye reparto, sipnosis, etc
+  
+
+
+### Decisiones técnicas
+##### Frontend
+
+* ##### Full-stack con Next.js 13+ usando tRPC
+* ##### TailwindCSS
+* ##### TypeScript
+* ##### React Query: Data fetching and caching
+* ##### Client & Server components
+
+
+### Despliegue con Vercel
+
+https://movies-app-web-theta.vercel.app/
