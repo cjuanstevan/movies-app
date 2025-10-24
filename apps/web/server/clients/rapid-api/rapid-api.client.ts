@@ -108,8 +108,8 @@ export class RapidApiClient {
         const params: Record<string, any> = {
             type: 'movie',
             rows: 20,
-            sortOrder: 'ASC',
-            sortField: 'id',
+            sortOrder: 'DESC',
+            sortField: 'numVotes',
             averageRatingFrom: 1
         };
 
